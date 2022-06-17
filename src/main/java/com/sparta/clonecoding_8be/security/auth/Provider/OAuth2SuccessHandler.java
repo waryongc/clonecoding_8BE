@@ -1,8 +1,7 @@
 package com.sparta.clonecoding_8be.security.auth.Provider;
 
-
-import com.nimbusds.oauth2.sdk.token.RefreshToken;
 import com.sparta.clonecoding_8be.dto.TokenDto;
+import com.sparta.clonecoding_8be.model.RefreshToken;
 import com.sparta.clonecoding_8be.repository.RefreshTokenRepository;
 import com.sparta.clonecoding_8be.security.jwt.TokenProvider;
 import lombok.RequiredArgsConstructor;
@@ -41,9 +40,6 @@ public class OAuth2SuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
         refreshTokenRepository.save(refreshToken);
 
         // 5. 토큰 발급
-
-
-
         targetUrl = UriComponentsBuilder.fromUriString("http://amorossoprc.shop/api")
                 .queryParam("Authorization", tokenDto.getAccessToken())
                 .build().toUriString();
