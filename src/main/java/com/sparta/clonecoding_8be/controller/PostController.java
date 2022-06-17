@@ -27,8 +27,8 @@ public class PostController {
 
     // Post 생성
     @PostMapping("/api/posts")
-    public String createPosts(@PathVariable Long id, @RequestBody PostRequestDto requestDto){
-        return postService.createPosts(id,requestDto);
+    public Post createPosts(@RequestBody PostRequestDto requestDto, String username){
+        return postService.createPosts(requestDto, username);
     }
 
     // Post 전체조회
