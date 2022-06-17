@@ -9,6 +9,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Service
@@ -40,6 +42,15 @@ public class PostService {
     }
 
     // Post 전체 조회
+//    public List<PostResponseDto> getAllPosts(){
+//        List<Post> postList;
+//        List<PostResponseDto> postResponseDtoList = new ArrayList<>();
+//        for(Post post : postList){
+//            PostResponseDto postResponseDto = new PostResponseDto(post);
+//            postResponseDtoList.add(postResponseDto);
+//        }
+//        return postResponseDtoList;
+//    }
 
 
     // Post 수정
@@ -56,13 +67,15 @@ public class PostService {
     }
 
     // Post 삭제
-    public void deletePost(Long id, String Username){
+    public String deletePost(Long id, String Username){
         Post post = postRepository.findById(id).orElseThrow(
                 () -> new IllegalArgumentException("게시물이 존재하지 않습니다.")
         );
-        if(!Objects.equals(Username, post.getMember().getUsername())){
-            throw new IllegalArgumentException("본인이 작성한 글만 삭제가 가능합니다.");
+        if(post.getMember().getUsername().equals(Username)){
+            postRepository.deleteById(id);
+            return "게시글이 삭제되었습니다.";
+        }else{
+            return "다른 사람의 게시글입니다.";
         }
-        postRepository.deleteById(id);
     }
 }

@@ -6,11 +6,13 @@ import com.sparta.clonecoding_8be.dto.PostRequestDto;
 import com.sparta.clonecoding_8be.model.Post;
 import com.sparta.clonecoding_8be.repository.MemberRepository;
 import com.sparta.clonecoding_8be.repository.PostRepository;
+import com.sparta.clonecoding_8be.security.UserDetailsImpl;
 import com.sparta.clonecoding_8be.service.MemberService;
 import com.sparta.clonecoding_8be.service.PostService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.security.core.userdetails.User;
@@ -27,13 +29,15 @@ public class PostController {
 
     // Post 생성
     @PostMapping("/api/posts")
-    public String createPosts(@PathVariable Long id, @RequestBody PostRequestDto requestDto){
-        return postService.createPosts(id,requestDto);
+    public Post createPosts(@RequestBody PostRequestDto requestDto, String username){
+        return postService.createPosts(requestDto, username);
     }
 
     // Post 전체조회
     @GetMapping("/api/posts")
-    public ResponseEntity<Post> creatPost()
+    public List<Post> getAllPosts(){
+        return postRepository.findAllByOrderByCreatedAtDesc();
+    }
 
     // Post 상세조회
     @GetMapping("/api/posts/{post_ID}")
@@ -53,9 +57,7 @@ public class PostController {
 
     // Post 삭제
     @DeleteMapping("/api/posts/{post_ID}")
-    public Long deletePost(@PathVariable Long post_ID){
-        postRepository.deleteById(post_ID);
-        return post_ID;
+    public String deletePost(@PathVariable Long post_ID, String Username){
+        return postService.deletePost(post_ID, Username);
     }
-
 }
