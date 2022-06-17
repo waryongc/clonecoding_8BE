@@ -13,6 +13,7 @@ public class PostDetailResponseDto {
     private String title;
     private Integer price;
     private String contents;
+    private String image;
 
     //modifiedAt ? 민지님께 물어보자
 
@@ -23,6 +24,7 @@ public class PostDetailResponseDto {
         this.title = post.getTitle();
         this.price = post.getPrice();
         this.contents = post.getContents();
+        this.image = post.getImage();
     }
 
 }
