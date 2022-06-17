@@ -29,6 +29,9 @@ public class Post extends Timestamped {
     @Column(nullable = false)
     private String contents;
 
+    @Column(nullable = false)
+    private String image;
+
     @JsonIgnore // 안붙게함
     @ManyToOne // 포스트가 다수니까
     @JoinColumn // 다른 model과 연결하겠다
@@ -39,6 +42,7 @@ public class Post extends Timestamped {
         this.title = postRequestDto.getTitle();
         this.price = postRequestDto.getPrice();
         this.contents = postRequestDto.getContents();
+        this.image = postRequestDto.getImage();
         this.member = member;
     }
 
