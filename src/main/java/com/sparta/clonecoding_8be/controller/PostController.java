@@ -1,24 +1,19 @@
 package com.sparta.clonecoding_8be.controller;
 
+
+
 import com.sparta.clonecoding_8be.dto.EditPostRequestDto;
 import com.sparta.clonecoding_8be.dto.PostDetailResponseDto;
 import com.sparta.clonecoding_8be.dto.PostRequestDto;
 import com.sparta.clonecoding_8be.model.Post;
-import com.sparta.clonecoding_8be.repository.MemberRepository;
 import com.sparta.clonecoding_8be.repository.PostRepository;
-import com.sparta.clonecoding_8be.security.UserDetailsImpl;
-import com.sparta.clonecoding_8be.service.MemberService;
 import com.sparta.clonecoding_8be.service.PostService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.bind.annotation.*;
 import org.springframework.security.core.userdetails.User;
+import org.springframework.web.bind.annotation.*;
 
-import java.nio.file.attribute.UserPrincipal;
-import java.security.Security;
 import java.util.List;
 
 @RestController
@@ -29,7 +24,10 @@ public class PostController {
 
     // Post 생성
     @PostMapping("/api/posts")
-    public Post createPosts(@RequestBody PostRequestDto requestDto, String username){
+    public PostDetailResponseDto createPosts(@RequestBody PostRequestDto requestDto){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        User principal=(User) authentication.getPrincipal();
+        String username = principal.getUsername();
         return postService.createPosts(requestDto, username);
     }
 

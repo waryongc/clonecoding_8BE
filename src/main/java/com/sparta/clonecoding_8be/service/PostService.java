@@ -24,14 +24,14 @@ public class PostService {
 
     // Post 저장
     @Transactional
-    public Post createPosts (PostRequestDto postRequestDto, String username){
+    public PostDetailResponseDto createPosts (PostRequestDto postRequestDto, String username){
         Member member = memberRepository.findByUsername(username).orElseThrow(
                 () -> new IllegalArgumentException("해당 ID의 회원이 존재하지 않습니다.")
         );
         Post post = new Post(postRequestDto, member);
         postRepository.save(post);
 
-        return post;
+        return new PostDetailResponseDto(post);
     }
 
     // Post 상세 조회
