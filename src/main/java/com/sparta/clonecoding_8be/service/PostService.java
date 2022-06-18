@@ -3,13 +3,17 @@ package com.sparta.clonecoding_8be.service;
 import com.sparta.clonecoding_8be.dto.*;
 import com.sparta.clonecoding_8be.model.Post;
 import com.sparta.clonecoding_8be.model.Member;
+import com.sparta.clonecoding_8be.postimg.S3Uploader;
 import com.sparta.clonecoding_8be.repository.CommentRepository;
 import com.sparta.clonecoding_8be.repository.MemberRepository;
 import com.sparta.clonecoding_8be.repository.PostRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -20,15 +24,20 @@ public class PostService {
 
     private final PostRepository postRepository;
     private final MemberRepository memberRepository;
+    private final S3Uploader s3Uploader;
 
 
     // Post 저장
     @Transactional
-    public PostDetailResponseDto createPosts (PostRequestDto postRequestDto, String username){
+    public PostDetailResponseDto createPosts (MultipartFile multipartFile, PostRequestDto postRequestDto, String username) throws IOException {
         Member member = memberRepository.findByUsername(username).orElseThrow(
                 () -> new IllegalArgumentException("해당 ID의 회원이 존재하지 않습니다.")
         );
         Post post = new Post(postRequestDto, member);
+        String urlHttps = s3Uploader.upload(multipartFile, "static");
+        String urlHttp = "http" + urlHttps.substring(5);
+        post.setImagefile(urlHttp);
+        System.out.println(urlHttp);
         postRepository.save(post);
 
         return new PostDetailResponseDto(post);

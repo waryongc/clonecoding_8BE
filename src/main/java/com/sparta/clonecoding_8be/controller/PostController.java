@@ -13,7 +13,9 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -24,11 +26,12 @@ public class PostController {
 
     // Post 생성
     @PostMapping("/api/posts")
-    public PostDetailResponseDto createPosts(@RequestBody PostRequestDto requestDto){
+    public PostDetailResponseDto createPosts(@RequestPart(value = "file",required = false) MultipartFile multipartFile, @RequestPart(value = "contents") PostRequestDto requestDto) throws IOException {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         User principal=(User) authentication.getPrincipal();
         String username = principal.getUsername();
-        return postService.createPosts(requestDto, username);
+
+        return postService.createPosts(multipartFile, requestDto, username);
     }
 
     // Post 전체조회
