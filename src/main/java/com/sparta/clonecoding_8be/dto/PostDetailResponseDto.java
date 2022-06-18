@@ -14,17 +14,25 @@ import java.util.List;
 @NoArgsConstructor
 public class PostDetailResponseDto {
     private Long id;
+    private String username;
+    private String nickname;
     private String title;
-    private Integer price;
+    private Long price;
     private String contents;
     private String imagefile;
     private LocalDateTime modifiedAt;
     private List<Comment> commentList;
+
+    int cntComment = commentList.size();
+
+
     //좋아요 한 사람들의 아이디 리스트는?
-    //comment 수는?
+
 
     public PostDetailResponseDto(Post post){
         this.id = post.getId();
+        this.username = post.getMember().getUsername();
+        this.nickname = post.getMember().getNickname();
         this.title = post.getTitle();
         this.price = post.getPrice();
         this.contents = post.getContents();

@@ -10,6 +10,6 @@ import lombok.Setter;
 public class EditPostRequestDto {
     private String title;
     private String contents;
-    private Integer price;
+    private Long price;
 
 }

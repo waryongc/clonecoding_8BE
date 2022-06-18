@@ -39,6 +39,7 @@ public class PostService {
         Post post = postRepository.findById(id).orElseThrow(
                 () -> new IllegalArgumentException("게시물이 존재하지 않습니다.")
         );
+
         return new PostDetailResponseDto(post);
     }
 

@@ -25,7 +25,7 @@ public class Post extends Timestamped {
     private String title;
 
     @Column(nullable = false)
-    private Integer price;
+    private Long price;
 
     @Column(nullable = false)
     private String contents;
