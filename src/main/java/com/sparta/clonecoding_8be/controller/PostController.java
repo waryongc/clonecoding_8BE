@@ -3,10 +3,12 @@ package com.sparta.clonecoding_8be.controller;
 import com.sparta.clonecoding_8be.dto.EditPostRequestDto;
 import com.sparta.clonecoding_8be.dto.PostDetailResponseDto;
 import com.sparta.clonecoding_8be.dto.PostRequestDto;
+import com.sparta.clonecoding_8be.dto.PostResponseDto;
 import com.sparta.clonecoding_8be.model.Post;
 import com.sparta.clonecoding_8be.repository.PostRepository;
 import com.sparta.clonecoding_8be.service.PostService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
@@ -31,7 +33,7 @@ public class PostController {
 
     // Post 전체조회
     @GetMapping("/api/posts")
-    public List<Post> getAllPosts(){
+    public List<Post> responseEntity() {
         return postRepository.findAllByOrderByCreatedAtDesc();
     }
 

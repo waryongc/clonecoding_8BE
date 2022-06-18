@@ -27,6 +27,21 @@ public class PostResponseDto {
 
 
 
+    public PostResponseDto(Long id, String title, Integer price, String contents,
+                           String imagefile, String address, LocalDateTime createdAtPost,
+                           LocalDateTime modifiedAtPost, int cntComment) {
+        this.id = id;
+        this.title = title;
+        this.price = price;
+        this.contents = contents;
+        this.imagefile = imagefile;
+        this.address = address;
+        this.createdAtPost = createdAtPost;
+        this.modifiedAtPost = modifiedAtPost;
+        this.cntComment = cntComment;
+    }
+
+
     //좋아요 한 사람들의 아이디 리스트는?
     //comment 수는?
 
