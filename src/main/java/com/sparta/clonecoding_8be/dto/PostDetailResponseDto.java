@@ -23,7 +23,7 @@ public class PostDetailResponseDto {
     private LocalDateTime modifiedAt;
     private List<Comment> commentList;
 
-    int cntComment = commentList.size();
+//    int cntComment = commentList.size();
 
 
     //좋아요 한 사람들의 아이디 리스트는?

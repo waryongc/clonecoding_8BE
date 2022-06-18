@@ -1,6 +1,7 @@
 package com.sparta.clonecoding_8be.controller;
 
 import com.sparta.clonecoding_8be.dto.CommentRequestDto;
+import com.sparta.clonecoding_8be.dto.CommentResponseDto;
 import com.sparta.clonecoding_8be.dto.EditCommentRequestDto;
 import com.sparta.clonecoding_8be.service.CommentService;
 import lombok.RequiredArgsConstructor;
@@ -10,6 +11,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.security.core.userdetails.User;
 
+import java.util.List;
 
 
 @RestController
@@ -27,6 +29,12 @@ public class CommentController {
         String username = principal.getUsername();
         commentService.saveComment(postID, username, commentRequestDto);
         return ResponseEntity.ok().build();
+    }
+
+    //댓글 조회
+    @GetMapping("/api/post/{postID}/comments")
+    public ResponseEntity<List<CommentResponseDto>> getCommentsByPostId (@PathVariable Long postid) {
+        return ResponseEntity.ok().body(commentService.getCommentsByPostId(postid));
     }
 
     //댓글 삭제

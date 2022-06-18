@@ -11,8 +11,8 @@ import com.sparta.clonecoding_8be.repository.MemberRepository;
 import com.sparta.clonecoding_8be.repository.PostRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -36,16 +36,17 @@ public class CommentService {
     }
 
     //댓글 조회
-    @Transactional
-    public List<CommentResponseDto> getCommentByPostId(Long postid){
-        List<Comment> comentListByPostId = commentRepository.findAllByPostId(postid);
+    @Transactional(readOnly = true)
+    public List<CommentResponseDto> getCommentsByPostId(Long postid) {
+        List<Comment> commentListByPostId =  commentRepository.findAllByPostId(postid);
 
         List<CommentResponseDto> commentResponseDtoList = new ArrayList<>();
 
-        for(Comment comment : comentListByPostId){
+        for(Comment comment : commentListByPostId){
             CommentResponseDto commentResponseDto = new CommentResponseDto(comment);
             commentResponseDtoList.add(commentResponseDto);
         }
+
         return commentResponseDtoList;
     }
 

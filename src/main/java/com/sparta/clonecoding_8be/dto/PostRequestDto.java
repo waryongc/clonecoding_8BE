@@ -14,5 +14,6 @@ public class PostRequestDto {
     private Long price;
     private String contents;
     private String address;
+    private String Imagefile;
     // address는?
 }
