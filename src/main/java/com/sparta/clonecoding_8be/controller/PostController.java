@@ -38,24 +38,27 @@ public class PostController {
     }
 
     // Post 상세조회
-    @GetMapping("/api/posts/{post_ID}")
-    public PostDetailResponseDto getPostDetail(@PathVariable Long post_ID){
-        return postService.getPostDetail(post_ID);
+    @GetMapping("/api/posts/{postID}")
+    public PostDetailResponseDto getPostDetail(@PathVariable Long postID){
+        return postService.getPostDetail(postID);
     }
 
     // Post 수정
-    @PutMapping("/api/posts/{post_ID}")
-    public void editPost(@PathVariable Long post_ID,
+    @PutMapping("/api/posts/{postID}")
+    public void editPost(@PathVariable Long postID,
                         @RequestBody EditPostRequestDto requestDto){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         User principal=(User) authentication.getPrincipal();
         String username = principal.getUsername();
-        postService.editPost(post_ID,requestDto,username);
+        postService.editPost(postID, requestDto, username);
     }
 
     // Post 삭제
-    @DeleteMapping("/api/posts/{post_ID}")
-    public String deletePost(@PathVariable Long post_ID, String Username){
-        return postService.deletePost(post_ID, Username);
+    @DeleteMapping("/api/posts/{postID}")
+    public String deletePost(@PathVariable Long postID){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        User principal=(User) authentication.getPrincipal();
+        String username = principal.getUsername();
+        return postService.deletePost(postID, username);
     }
 }
