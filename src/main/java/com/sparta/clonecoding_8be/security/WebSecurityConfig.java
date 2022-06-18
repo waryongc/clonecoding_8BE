@@ -1,6 +1,7 @@
 package com.sparta.clonecoding_8be.security;
 
 
+import com.sparta.clonecoding_8be.security.auth.OAuthUserDeatilsServiceImpl;
 import com.sparta.clonecoding_8be.security.auth.Provider.OAuth2SuccessHandler;
 import com.sparta.clonecoding_8be.security.jwt.JwtAccessDeniedHandler;
 import com.sparta.clonecoding_8be.security.jwt.JwtAuthenticationEntryPoint;
@@ -90,7 +91,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         CorsConfiguration configuration = new CorsConfiguration();
         configuration.addAllowedMethod("*");
         configuration.addAllowedHeader("*");
-        configuration.addAllowedOriginPattern("http://amorossoprc.shop/"); // 배포 전 모두 허용
+        configuration.addAllowedOriginPattern("*"); // 배포 전 모두 허용
         configuration.setAllowCredentials(true);
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();

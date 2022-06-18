@@ -1,7 +1,7 @@
 package com.sparta.clonecoding_8be.security.jwt;
 
 
-import com.sparta.clonecoding_8be.security.filter.JwtFilter;
+import com.sparta.clonecoding_8be.security.auth.filter.JwtFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.config.annotation.SecurityConfigurerAdapter;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;

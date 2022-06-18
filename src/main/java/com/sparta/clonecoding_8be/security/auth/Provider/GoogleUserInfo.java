@@ -14,8 +14,9 @@ public class GoogleUserInfo implements OAuth2UserInfo{
     }
 
     @Override
-    public String getProviderId() {
-        return (String) attributes.get("sub");
+    public String getProfileImg() {
+        //https 링크
+        return (String) attributes.get("picture");
     }
 
     @Override

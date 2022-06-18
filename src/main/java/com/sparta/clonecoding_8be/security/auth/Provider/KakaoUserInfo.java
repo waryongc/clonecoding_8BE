@@ -14,10 +14,10 @@ public class KakaoUserInfo implements OAuth2UserInfo{
     }
 
     @Override
-    public String getProviderId() {
-        return (String) attributes.get("id").toString();
+    public String getProfileImg(){
+        Map<String, Object> profile = (Map<String, Object>) attributes.get("profile");
+        return (String) profile.get("thumbnail_image_url");
     }
-
     @Override
     public String getProvider() {
         return "kakao";
@@ -30,9 +30,7 @@ public class KakaoUserInfo implements OAuth2UserInfo{
 
     @Override
     public String getName() {
-        Map<String, Object> properties = (Map<String, Object>) attributes.get("properties");
-        System.out.println(properties);
-        System.out.println(properties.get("nickname"));
-        return (String) properties.get("nickname");
+        Map<String, Object> profile = (Map<String, Object>) attributes.get("profile");
+        return (String) profile.get("nickname");
     }
 }

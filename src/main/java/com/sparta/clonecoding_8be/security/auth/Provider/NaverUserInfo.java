@@ -14,8 +14,8 @@ public class NaverUserInfo implements OAuth2UserInfo{
     }
 
     @Override
-    public String getProviderId() {
-        return (String) attributes.get("id");
+    public String getProfileImg() {
+        return (String) attributes.get("profile_image");
     }
 
     @Override
@@ -30,6 +30,7 @@ public class NaverUserInfo implements OAuth2UserInfo{
 
     @Override
     public String getName() {
-        return (String) attributes.get("name");
+        //nickname: 네이버 닉네임 name: 사용자 이름
+        return (String) attributes.get("nickname");
     }
 }

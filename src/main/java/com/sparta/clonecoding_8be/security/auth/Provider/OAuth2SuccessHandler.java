@@ -3,6 +3,7 @@ package com.sparta.clonecoding_8be.security.auth.Provider;
 import com.sparta.clonecoding_8be.dto.TokenDto;
 import com.sparta.clonecoding_8be.model.RefreshToken;
 import com.sparta.clonecoding_8be.repository.RefreshTokenRepository;
+import com.sparta.clonecoding_8be.security.UserDetailsImpl;
 import com.sparta.clonecoding_8be.security.jwt.TokenProvider;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -28,9 +29,14 @@ public class OAuth2SuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
             throws ServletException, IOException {
         String targetUrl;
 
+        UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
+
         // 최초 로그인이라면 회원가입 처리를 한다.
 
         TokenDto tokenDto = tokenProvider.generateTokenDto(authentication);
+
+        tokenDto.setUsername(userDetails.getUsername());
+        tokenDto.setUsername(userDetails.getNickname());
 
         RefreshToken refreshToken = RefreshToken.builder()
                 .key(authentication.getName())
@@ -40,7 +46,7 @@ public class OAuth2SuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
         refreshTokenRepository.save(refreshToken);
 
         // 5. 토큰 발급
-        targetUrl = UriComponentsBuilder.fromUriString("http://amorossoprc.shop/api")
+        targetUrl = UriComponentsBuilder.fromUriString("http://localhost:8080/api")
                 .queryParam("Authorization", tokenDto.getAccessToken())
                 .build().toUriString();
         getRedirectStrategy().sendRedirect(request, response, targetUrl);

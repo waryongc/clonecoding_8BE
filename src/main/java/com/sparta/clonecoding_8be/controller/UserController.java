@@ -1,7 +1,9 @@
 package com.sparta.clonecoding_8be.controller;
 
+import com.sparta.clonecoding_8be.common.exception.UserException;
 import com.sparta.clonecoding_8be.dto.*;
 import com.sparta.clonecoding_8be.model.Member;
+import com.sparta.clonecoding_8be.postimg.S3Uploader;
 import com.sparta.clonecoding_8be.repository.MemberRepository;
 import com.sparta.clonecoding_8be.service.MemberService;
 import lombok.RequiredArgsConstructor;
@@ -11,18 +13,29 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
 
 @Controller
 @RequiredArgsConstructor
 public class UserController {
     private final MemberService memberService;
     private final MemberRepository memberRepository;
+
+    private final S3Uploader s3Uploader;
+
+    @PostMapping("/api/images")
+    @ResponseBody
+    public String upload(@RequestParam("file") MultipartFile multipartFile)throws IOException {
+        String url = s3Uploader.upload(multipartFile, "static");
+        System.out.println("이미지 url 주소 = " + url);
+        return url;
+    }
+
     @PostMapping("/user/signup")
-    public ResponseEntity<MemberResponseDto> signup(@RequestBody MemberRequestDto memberRequestDto) {
+    public ResponseEntity<MemberResponseDto> signup(@RequestBody MemberRequestDto memberRequestDto) throws UserException {
         return ResponseEntity.ok(memberService.signup(memberRequestDto));
     }
 

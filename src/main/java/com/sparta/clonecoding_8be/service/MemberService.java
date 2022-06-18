@@ -1,6 +1,8 @@
 package com.sparta.clonecoding_8be.service;
 
 
+import com.sparta.clonecoding_8be.common.Constants;
+import com.sparta.clonecoding_8be.common.exception.UserException;
 import com.sparta.clonecoding_8be.dto.MemberRequestDto;
 import com.sparta.clonecoding_8be.dto.MemberResponseDto;
 import com.sparta.clonecoding_8be.dto.TokenDto;
@@ -11,6 +13,7 @@ import com.sparta.clonecoding_8be.repository.MemberRepository;
 import com.sparta.clonecoding_8be.repository.RefreshTokenRepository;
 import com.sparta.clonecoding_8be.security.jwt.TokenProvider;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.core.Authentication;
@@ -27,9 +30,9 @@ public class MemberService {
     private final TokenProvider tokenProvider;
     private final RefreshTokenRepository refreshTokenRepository;
     @Transactional
-    public MemberResponseDto signup(MemberRequestDto memberRequestDto) {
+    public MemberResponseDto signup(MemberRequestDto memberRequestDto) throws UserException{
         if (memberRepository.existsByUsername(memberRequestDto.getUsername())) {
-            throw new RuntimeException("이미 가입되어 있는 유저입니다");
+            throw new UserException(Constants.ExceptionClass.SIGNUP_USERNAME, HttpStatus.BAD_REQUEST, "이미 가입되어 있는 회원입니다.");
         }
 
         Member member = memberRequestDto.toMember(passwordEncoder);

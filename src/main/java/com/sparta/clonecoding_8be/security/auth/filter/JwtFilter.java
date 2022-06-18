@@ -1,4 +1,4 @@
-package com.sparta.clonecoding_8be.security.filter;
+package com.sparta.clonecoding_8be.security.auth.filter;
 
 import com.sparta.clonecoding_8be.security.jwt.TokenProvider;
 import lombok.RequiredArgsConstructor;

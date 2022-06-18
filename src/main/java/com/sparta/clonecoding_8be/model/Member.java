@@ -25,9 +25,6 @@ public class Member extends Timestamped {
     @JsonIgnore
     private String password;
 
-    @Transient
-    private String passwordCheck;
-
     @Column(nullable = false)
     private String nickname;
 
@@ -37,16 +34,11 @@ public class Member extends Timestamped {
     @Column
     private String provider;
 
-//    @JsonIgnore
+    @Column
+    private String profileImage;
+
 //    @Column
-//    // 자바 객체 사이드에서만 저장됨 (DB에 저장안됨)
-//    @OneToMany(mappedBy = "member")
-//    private List<Post> posts;
-//
-//    @JsonIgnore
-//    // 자바 객체 사이드에서만 저장됨 (DB에 저장안됨)
-//    @OneToMany(mappedBy = "member")
-//    private List<Comment> comments;
+//    private String address;
 
 
     public Member(String username, String nickname, String password, UserRole userRole) {
@@ -56,12 +48,13 @@ public class Member extends Timestamped {
         this.userRole = userRole;
     }
 
-    public Member(String username, String password, String nickname, UserRole userRole, String provider) {
+    public Member(String username, String password, String nickname, UserRole userRole, String provider, String profileImage) {
         this.username = username;
         this.password = password;
         this.nickname = nickname;
         this.userRole = userRole;
         this.provider = provider;
+        this.profileImage = profileImage;
     }
 
     @Builder

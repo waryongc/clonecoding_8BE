@@ -1,4 +1,4 @@
-package com.sparta.clonecoding_8be.security.filter;
+package com.sparta.clonecoding_8be.security.auth.filter;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
