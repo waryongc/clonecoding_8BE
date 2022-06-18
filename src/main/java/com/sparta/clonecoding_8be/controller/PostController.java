@@ -1,7 +1,5 @@
 package com.sparta.clonecoding_8be.controller;
 
-
-
 import com.sparta.clonecoding_8be.dto.EditPostRequestDto;
 import com.sparta.clonecoding_8be.dto.PostDetailResponseDto;
 import com.sparta.clonecoding_8be.dto.PostRequestDto;
