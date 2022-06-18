@@ -9,6 +9,7 @@ import lombok.Setter;
 import net.minidev.json.annotate.JsonIgnore;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Setter
@@ -38,6 +39,10 @@ public class Post extends Timestamped {
     @ManyToOne // 포스트가 다수니까
     @JoinColumn // 다른 model과 연결하겠다
     private Member member;
+
+    @OneToMany
+    @JoinColumn
+    private List<Comment> commentList;
 
 
     public Post (PostRequestDto postRequestDto, Member member){

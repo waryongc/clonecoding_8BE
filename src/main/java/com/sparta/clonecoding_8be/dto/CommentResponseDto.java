@@ -13,8 +13,8 @@ public class CommentResponseDto {
     private Long id;
     private String username;
     private String comment;
-    private LocalDateTime created;
-    private LocalDateTime modified;
+    private LocalDateTime createdAtComment;
+    private LocalDateTime modifiedAtComment;
 
     //postingid는?
     //commentid는?
@@ -24,7 +24,7 @@ public class CommentResponseDto {
         this.id = comment.getId();
         this.username = comment.getMember().getUsername();
         this.comment = comment.getComment();
-        this.created = comment.getCreatedAt();
-        this.modified = comment.getModifiedAt();
+        this.createdAtComment = comment.getCreatedAt();
+        this.modifiedAtComment = comment.getModifiedAt();
     }
 }

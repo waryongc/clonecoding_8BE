@@ -3,6 +3,7 @@ package com.sparta.clonecoding_8be.service;
 import com.sparta.clonecoding_8be.dto.*;
 import com.sparta.clonecoding_8be.model.Post;
 import com.sparta.clonecoding_8be.model.Member;
+import com.sparta.clonecoding_8be.repository.CommentRepository;
 import com.sparta.clonecoding_8be.repository.MemberRepository;
 import com.sparta.clonecoding_8be.repository.PostRepository;
 import lombok.RequiredArgsConstructor;
@@ -19,6 +20,7 @@ public class PostService {
 
     private final PostRepository postRepository;
     private final MemberRepository memberRepository;
+    private final CommentRepository commentRepository;
 
 
     // Post 저장
@@ -41,7 +43,7 @@ public class PostService {
         return new PostDetailResponseDto(post);
     }
 
-    // Post 전체 조회
+    // Post 전체 조회 Conroller 단에서 해결
 //    public List<PostResponseDto> getAllPosts(){
 //        List<Post> postList;
 //        List<PostResponseDto> postResponseDtoList = new ArrayList<>();
