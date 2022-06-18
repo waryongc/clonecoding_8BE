@@ -1,5 +1,6 @@
 package com.sparta.clonecoding_8be.model;
 
+import com.sparta.clonecoding_8be.dto.EditCommentRequestDto;
 import com.sparta.clonecoding_8be.util.Timestamped;
 import lombok.Builder;
 import lombok.Getter;
@@ -30,5 +31,14 @@ public class Comment extends Timestamped {
     @Builder
     public Comment(String comment, Post post, Member member) {
         this.comment = comment;
+    }
+
+    public void registCommentInfo(Post post, Member member){
+        this.post = post;
+        this.member = member;
+    }
+
+    public void updateComment(EditCommentRequestDto requestDto) {
+        this.comment = requestDto.getComments();
     }
 }
