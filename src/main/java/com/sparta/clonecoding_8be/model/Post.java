@@ -33,6 +33,9 @@ public class Post extends Timestamped {
     @Column(nullable = false)
     private String imagefile;
 
+    @Column(nullable = false)
+    private String address;
+
     //address는 아직 못해봤다.
 
     @JsonIgnore // 안붙게함
@@ -50,6 +53,7 @@ public class Post extends Timestamped {
         this.price = postRequestDto.getPrice();
         this.contents = postRequestDto.getContents();
         this.imagefile = postRequestDto.getImagefile();
+        this.address = postRequestDto.getAddress();
         this.member = member;
     }
 

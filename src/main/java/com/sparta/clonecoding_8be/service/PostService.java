@@ -20,7 +20,6 @@ public class PostService {
 
     private final PostRepository postRepository;
     private final MemberRepository memberRepository;
-    private final CommentRepository commentRepository;
 
 
     // Post 저장

@@ -18,6 +18,7 @@ public class PostResponseDto {
     private Integer price;
     private String contents;
     private String imagefile;
+    private String address;
     //좋아요 한 사람들의 아이디 리스트는?
     //comment 수는?
 }
