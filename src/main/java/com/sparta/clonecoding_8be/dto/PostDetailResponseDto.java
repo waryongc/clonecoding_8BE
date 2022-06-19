@@ -18,7 +18,7 @@ public class PostDetailResponseDto {
     private String nickname;
     private String title;
     private Long price;
-    private String contents;
+    private String content;
     private String imagefile;
     private LocalDateTime modifiedAt;
     private List<Comment> commentList;
@@ -35,7 +35,7 @@ public class PostDetailResponseDto {
         this.nickname = post.getMember().getNickname();
         this.title = post.getTitle();
         this.price = post.getPrice();
-        this.contents = post.getContents();
+        this.content = post.getContent();
         this.imagefile = post.getImagefile();
         this.modifiedAt = post.getModifiedAt();
         this.commentList = post.getCommentList();

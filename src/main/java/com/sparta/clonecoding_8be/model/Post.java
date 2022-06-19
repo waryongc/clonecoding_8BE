@@ -29,7 +29,7 @@ public class Post extends Timestamped {
     private Long price;
 
     @Column(nullable = false)
-    private String contents;
+    private String content;
 
     @Column(nullable = false)
     private String imagefile;
@@ -49,11 +49,11 @@ public class Post extends Timestamped {
     private List<Comment> commentList;
 
 
-    public Post (PostRequestDto postRequestDto, Member member){
+    public Post (PostRequestDto postRequestDto, Member member, String imagefile){
         this.title = postRequestDto.getTitle();
         this.price = postRequestDto.getPrice();
-        this.contents = postRequestDto.getContents();
-        this.imagefile = postRequestDto.getImagefile();
+        this.content = postRequestDto.getContent();
+        this.imagefile = imagefile;
         this.address = postRequestDto.getAddress();
         this.member = member;
     }
@@ -61,6 +61,6 @@ public class Post extends Timestamped {
     public void editPost(EditPostRequestDto editPostRequestDto){
         this.title = editPostRequestDto.getTitle();
         this.price = editPostRequestDto.getPrice();
-        this.contents = editPostRequestDto.getContents();
+        this.content = editPostRequestDto.getContents();
     }
 }

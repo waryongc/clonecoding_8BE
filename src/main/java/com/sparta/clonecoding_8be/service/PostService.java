@@ -33,11 +33,9 @@ public class PostService {
         Member member = memberRepository.findByUsername(username).orElseThrow(
                 () -> new IllegalArgumentException("해당 ID의 회원이 존재하지 않습니다.")
         );
-        Post post = new Post(postRequestDto, member);
         String urlHttps = s3Uploader.upload(multipartFile, "static");
         String urlHttp = "http" + urlHttps.substring(5);
-        post.setImagefile(urlHttp);
-        System.out.println(urlHttp);
+        Post post = new Post(postRequestDto, member, urlHttp);
         postRepository.save(post);
 
         return new PostDetailResponseDto(post);
