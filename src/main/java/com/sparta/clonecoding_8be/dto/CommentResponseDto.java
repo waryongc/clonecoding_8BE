@@ -9,22 +9,13 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Getter
 public class CommentResponseDto {
-
-    private Long id;
-    private String username;
     private String comment;
-    private LocalDateTime createdAtComment;
+    private String nickname;
     private LocalDateTime modifiedAtComment;
 
-    //postingid는?
-    //commentid는?
-    //username과 userid는?
-
-    public CommentResponseDto(Comment comment){
-        this.id = comment.getId();
-        this.username = comment.getMember().getUsername();
+    public CommentResponseDto(Comment comment) {
         this.comment = comment.getComment();
-        this.createdAtComment = comment.getCreatedAt();
+        this.nickname = getNickname();
         this.modifiedAtComment = comment.getModifiedAt();
     }
 }

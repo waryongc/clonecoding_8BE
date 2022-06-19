@@ -32,34 +32,34 @@ public class CommentController {
     }
 
     //댓글 조회
-    @GetMapping("/api/post/{postID}/comments")
-    public ResponseEntity<List<CommentResponseDto>> getCommentsByPostId (@PathVariable Long postid) {
-        return ResponseEntity.ok().body(commentService.getCommentsByPostId(postid));
+    @GetMapping("/api/posts/{postID}/comments")
+    public ResponseEntity<List<CommentResponseDto>> getCommentsByPostId (@PathVariable Long postID) {
+        return ResponseEntity.ok().body(commentService.getCommentsByPostId(postID));
     }
 
     //댓글 삭제
-    @DeleteMapping("/api/posts/{postID}/comments/{comments}")
-    public Boolean deleteComment(@PathVariable Long comments){
+    @DeleteMapping("/api/posts/{postID}/comments/{commentID}")
+    public Boolean deleteComment(@PathVariable Long commentID){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         User principal = (User) authentication.getPrincipal();
         String username = principal.getUsername();
         Boolean result = false;
         if (username != null) {
-            result = commentService.deleteComment(comments, username);
+            result = commentService.deleteComment(commentID, username);
         }
         return result;
     }
 
     //댓글 수정
-    @PutMapping("/api/posts/{postID}/comments/{comments}")
-    public Boolean updateComment(@PathVariable Long comments,
+    @PutMapping("/api/posts/{postID}/comments/{commentID}")
+    public Boolean updateComment(@PathVariable Long commentID,
                                  @RequestBody EditCommentRequestDto editCommentRequestDto){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         User principal = (User) authentication.getPrincipal();
         String username = principal.getUsername();
         Boolean result = false;
         if(username != null){
-            result = commentService.updateComment(comments,editCommentRequestDto,username);
+            result = commentService.updateComment(commentID,editCommentRequestDto,username);
         }
         return result;
     }

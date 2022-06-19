@@ -8,5 +8,5 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 public class EditCommentRequestDto {
-    private String comments;
+    private String comment;
 }
