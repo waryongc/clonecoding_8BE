@@ -14,5 +14,4 @@ public class PostRequestDto {
     private Long price;
     private String content;
     private String address;
-    // address는?
 }

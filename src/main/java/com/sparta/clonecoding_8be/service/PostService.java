@@ -50,6 +50,7 @@ public class PostService {
         return new PostDetailResponseDto(post);
     }
 
+
     // Post 전체 조회 Conroller 단에서 해결
 //    public List<PostResponseDto> getAllPosts(){
 //        List<Post> postList;

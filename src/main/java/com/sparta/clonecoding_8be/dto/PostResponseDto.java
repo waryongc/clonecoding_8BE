@@ -14,33 +14,14 @@ import java.util.List;
 @NoArgsConstructor
 public class PostResponseDto {
     private Long id;
-
     private String title;
     private Integer price;
     private String contents;
     private String imagefile;
     private String address;
-    private LocalDateTime createdAtPost;
-    private LocalDateTime modifiedAtPost;
+    private LocalDateTime modifiedAt;
     private List<Comment> commentList;
-    int cntComment = commentList.size();
-
-
-
-    public PostResponseDto(Long id, String title, Integer price, String contents,
-                           String imagefile, String address, LocalDateTime createdAtPost,
-                           LocalDateTime modifiedAtPost, int cntComment) {
-        this.id = id;
-        this.title = title;
-        this.price = price;
-        this.contents = contents;
-        this.imagefile = imagefile;
-        this.address = address;
-        this.createdAtPost = createdAtPost;
-        this.modifiedAtPost = modifiedAtPost;
-        this.cntComment = cntComment;
-    }
-
+    int commentCnt = commentList.size();
 
     //좋아요 한 사람들의 아이디 리스트는?
     //comment 수는?
