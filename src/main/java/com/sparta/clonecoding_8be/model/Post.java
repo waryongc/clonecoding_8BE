@@ -37,6 +37,7 @@ public class Post extends Timestamped {
     @Column(nullable = false)
     private String address;
 
+
     //address는 아직 못해봤다.
 
     @JsonIgnore // 안붙게함

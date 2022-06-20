@@ -40,8 +40,8 @@ public class PostController {
 
     // Post 전체조회
     @GetMapping("/api/posts")
-    public List<Post> responseEntity() {
-        return postRepository.findAllByOrderByCreatedAtDesc();
+    public List<PostResponseDto> getAllposts(){
+        return postService.getAllPosts();
     }
 
     // Post 상세조회

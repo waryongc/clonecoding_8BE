@@ -51,16 +51,27 @@ public class PostService {
     }
 
 
-    // Post 전체 조회 Conroller 단에서 해결
-//    public List<PostResponseDto> getAllPosts(){
-//        List<Post> postList;
-//        List<PostResponseDto> postResponseDtoList = new ArrayList<>();
-//        for(Post post : postList){
-//            PostResponseDto postResponseDto = new PostResponseDto(post);
-//            postResponseDtoList.add(postResponseDto);
-//        }
-//        return postResponseDtoList;
-//    }
+//    // Post 전체 조회 Conroller 단에서 해결
+    public List<PostResponseDto> getAllPosts(){
+        List<Post> postList = postRepository.findAll();
+        List<PostResponseDto> postResponseDtoList = new ArrayList<>();
+        for(Post post : postList){
+            postResponseDtoList.add(new PostResponseDto(
+                    post.getId(),
+                    post.getMember().getUsername(),
+                    post.getMember().getNickname(),
+                    post.getMember().getProfileImage(),
+                    post.getTitle(),
+                    post.getPrice(),
+                    post.getContent(),
+                    post.getImagefile(),
+                    post.getAddress(),
+                    post.getModifiedAt(),
+                    post.getCommentList().size()
+            ));
+        }
+        return postResponseDtoList;
+    }
 
 
     // Post 수정
